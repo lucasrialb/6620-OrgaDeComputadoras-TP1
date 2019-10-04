@@ -10,11 +10,37 @@ col_major:tp1_if_col_major tp1_tables_col_major
 
 global_dims: tp1_tables_global_dims
 
+optimizations: tp1_if_o0 tp1_tables_o0 tp1_if_o1 tp1_tables_o1 tp1_if_o2 tp1_tables_o2 tp1_if_o3 tp1_tables_o3
+
 tp1_if: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_jumps.c artist_ant.c 
 	gcc -g $^ -o $@
 
 tp1_tables: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_tables.c artist_ant.c 
 	gcc -g -DUSE_TABLES -DUSE_GLOBAL_GRID_DIMS $^ -o $@
+
+tp1_if_o0: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_jumps.c artist_ant.c 
+	gcc -O0 -g $^ -o $@
+
+tp1_tables_o0: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_tables.c artist_ant.c 
+	gcc -O0 -g -DUSE_TABLES -DUSE_GLOBAL_GRID_DIMS $^ -o $@
+
+tp1_if_o1: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_jumps.c artist_ant.c 
+	gcc -O1 -g $^ -o $@
+
+tp1_tables_o1: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_tables.c artist_ant.c 
+	gcc -O1 -g -DUSE_TABLES -DUSE_GLOBAL_GRID_DIMS $^ -o $@
+
+tp1_if_o2: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_jumps.c artist_ant.c 
+	gcc -O2 -g $^ -o $@
+
+tp1_tables_o2: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_tables.c artist_ant.c 
+	gcc -O2 -g -DUSE_TABLES -DUSE_GLOBAL_GRID_DIMS $^ -o $@
+
+tp1_if_o3: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_jumps.c artist_ant.c 
+	gcc -O3 -g $^ -o $@
+
+tp1_tables_o3: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_tables.c artist_ant.c 
+	gcc -O3 -g -DUSE_TABLES -DUSE_GLOBAL_GRID_DIMS $^ -o $@
 
 tp1_if_pf: square_grid.c builders.c palette.c rules.c square_grid.c ant_engine.c ant_engine_jumps.c artist_ant.c 
 	gcc -no-pie -pg -g -DSANITY_CHECK $^ -o $@
